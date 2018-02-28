@@ -38,16 +38,20 @@
  %\RequirePackage[russian,english]{babel}
 \else
  \ifLuaTeX
+  \RequirePackage{unicode-math}
   \RequirePackage{luatextra}
   \RequirePackage{fontspec}
   \usepackage{polyglossia}
   %\setmainlanguage{russian}
   %\setotherlanguage{english}
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Numbers=Lining}
+  % Default LaTeX fonts as OTF/TTF
+  \setmainfont{CMU Serif}
+  \setsansfont{CMU Sans Serif}
+  \setmonofont{CMU Typewriter Text}
+  \defaultfontfeatures{Ligatures=TeX,Numbers=Lining,Scale=MatchLowercase}
   \newfontfeature{Microtype}{protrusion=default;expansion=default;}
-  % \setmathfont{Asana Math}
-  \setsansfont{Linux Biolinum O}
+  % \setsansfont{Linux Biolinum O}
  \fi
 \fi
 
@@ -85,7 +89,8 @@
 %\@ifpackageloaded{natbib}{}{
 %  \setcitestyle{numbers,square} % FIXME!!
 %  }
-\def\nla@defgeom{\geometry{a4paper,height=25cm,width=16cm,inner=1.4cm}}
+
+\def\nla@defgeom{\geometry{a4paper,height=25cm,width=16.7cm,inner=1.5cm,marginparwidth=2cm}}
 
 % \textheight= 25cm
 % \textwidth= 16cm
@@ -120,7 +125,7 @@
 
 
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
+    %bookmarks=true,         % show bookmarks bar?
     unicode=true,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
@@ -144,6 +149,8 @@
 \def\start@i18n{}
 \def\start@switcht{\switcht@albion}
 
+% -------------------- OPTION DECLARATION CHUNK ---------------------------
+
 \DeclareOption{english}{
   \ifLuaTeX
   \relax
@@ -162,7 +169,7 @@
   \setmainlanguage{russian}
   \setotherlanguage{english}
   \setkeys{russian}{babelshorthands=true}
-  \setmainfont[Ligatures=TeX]{CMU Serif}
+  % \setmainfont[Ligatures=TeX]{CMU Serif} % FIXME: texlive-texfontsextra
   \setmainfont[
   Ligatures=TeX,
   Extension=.otf,
@@ -170,15 +177,55 @@
   ItalicFont=cmunti,
   BoldItalicFont=cmunbi,
   ]{cmunrm}
-  \newfontfamily{\cyrillicfonttt}{Fira Mono}
 \else
   \@ifpackageloaded{babel}{}{
     \def\start@language{russian}
     }
-    \fi
-    \def\start@switcht{\switcht@russian}
-
+\fi
+\def\start@switcht{\switcht@russian}
 }
+
+
+\DeclareOption{times}{
+\ifPDFTeX\relax
+\else
+  \setmainfont{Times New Roman}
+  \newfontfamily{\cyrillicfonttt}{Courier New}
+  \setmathfont{XITS Math}
+\fi
+}
+
+\DeclareOption{asanamath}{
+\ifPDFTeX\relax
+\else
+  \setmathfont{Asana Math}
+\fi
+}
+
+\DeclareOption{firamono}{
+\ifPDFTeX\relax
+\else
+  \setmonofont[Numbers=SlashedZero]{Fira Mono}
+  \newfontfamily{\cyrillicfonttt}{Fira Mono}
+\fi
+}
+
+\DeclareOption{sourcecode}{
+\ifPDFTeX\relax
+\else
+  \setmonofont[Numbers=SlashedZero]{Source Code Pro}
+  \newfontfamily{\cyrillicfonttt}{Source Code Pro}
+\fi
+}
+
+\DeclareOption{firasans}{
+\ifPDFTeX\relax
+\else
+  \setsansfont{Fira Sans Regular}
+\fi
+}
+
+% ------------------------- END OF OPTION DECLARATION CHUNK ---------------------
 
 \ExecuteOptions{english}
 \ProcessOptions\relax
@@ -366,7 +413,9 @@
 \newif\if@english@title
 \@english@titlefalse
 
-\newenvironment{english}{\switcht@albion\@english@titletrue}{\relax\@english@titlefalse}
+\newenvironment{englishtitle}%
+{\selectlanguage{english}\switcht@albion\@english@titletrue}%
+{\relax\@english@titlefalse}
 
 \renewcommand\maketitle{\if@english@title\relax\else\newpage\fi
 \phantomsection
@@ -493,7 +542,7 @@
 \righthyphenmin=2
 \lefthyphenmin=2
 
-%\nla@defgeom\start@i18n
+\nla@defgeom\start@i18n
 \endinput
 %%
 %% End of file `nla.sty'.
