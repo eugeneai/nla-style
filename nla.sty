@@ -25,10 +25,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nla}[2017/02/08 v1.0 NLA'2018 and so on correcting style]%
 
+\newif\if@internationalization@nla@
+\@internationalization@nla@false
+
 \@ifpackageloaded{babel}{
-  \typeout{WARNING: Working with BABEL}
+  %\typeout{WARNING: Working with BABEL}
+  \@internationalization@nla@true
 }{
-  \typeout{WARNING: Working without BABEL}
+  %\typeout{WARNING: Working without BABEL}
 }
 
 \RequirePackage{iftex}
@@ -58,16 +62,14 @@
   \defaultfontfeatures{Ligatures=TeX,Numbers=Lining,Scale=MatchLowercase}
   \newfontfeature{Microtype}{protrusion=default;expansion=default;}
   % \setsansfont{Linux Biolinum O}
+  \@internationalization@nla@true
  \fi
 \fi
 
-\@ifpackageloaded{babel}{
-\typeout{BABEL}%
-}{
-\typeout{NO BABEL.}%
-\providecommand{\selectlanguage}[1]{}
-\providecommand{\select@language}[1]{}
-}
+% \if@internationalization@nla@
+% \providecommand{\selectlanguage}[1]{}
+% \providecommand{\select@language}[1]{}
+% \fi
 
 %\RequirePackage{amssymb}
 \RequirePackage{graphicx}
@@ -159,22 +161,16 @@
     urlcolor=black % [rgb]{0.3 0.0 0.3}           % color of external links
 }
 
-\def\start@language{}
 \def\start@i18n{}
 \def\start@switcht{}
 
 % -------------------- OPTION DECLARATION CHUNK ---------------------------
 
 \DeclareOption{english}{
-  \ifLuaTeX
-  \relax
-  \else
-  \@ifpackageloaded{babel}{
-    \def\start@i18n{\babelensure{english}}
+  \if@internationalization@nla@
+    \def\start@i18n{\selectlanguage{english}}
     \def\start@switcht{\switcht@albion}
-  }{ % FIXME: Polyglossia
-    }
-    \fi
+  \fi
 }
 
 \DeclareOption{russian}{
@@ -183,21 +179,20 @@
   \setotherlanguage{english}
   \setkeys{russian}{babelshorthands=true}
   % \setmainfont[Ligatures=TeX]{CMU Serif} % FIXME: texlive-texfontsextra
-  \setmainfont[
-  Ligatures=TeX,
-  Extension=.otf,
-  BoldFont=cmunbx,
-  ItalicFont=cmunti,
-  BoldItalicFont=cmunbi,
-  ]{cmunrm}
-\else
-  \@ifpackageloaded{babel}{
-    \def\start@language{russian}
-    }{}
+  % \setmainfont[
+  % Ligatures=TeX,
+  % Extension=.otf,
+  % BoldFont=cmunbx,
+  % ItalicFont=cmunti,
+  % BoldItalicFont=cmunbi,
+  % ]{cmunrm}
+  \else
+  \if@internationalization@nla@
+  \def\start@i18n{\selectlanguage{russian}}
+  \def\start@switcht{\switcht@russian}
+  \fi
 \fi
-\def\start@switcht{\switcht@russian}
 }
-
 
 \DeclareOption{times}{
 \ifPDFTeX\relax
@@ -374,9 +369,7 @@
 \def\subclassname{{\it Subject Classifications\/}:}
 \def\tablename{Table}
 \def\thebibliographyname{References}
-\def\theoremname{Theorem}
-\@ifpackageloaded{babel}{\selectlanguage{english}}{}
-}
+\def\theoremname{Theorem}}
 \switcht@albion
 
 \def\switcht@russian{%
@@ -415,12 +408,12 @@
 \def\subclassname{{\it Тематические классификации\/}:}
 \def\tablename{Таблица}
 \def\thebibliographyname{Список литературы}
-\def\theoremname{Теорема}
-\@ifpackageloaded{babel}{\selectlanguage{russian}}{}
-}
+\def\theoremname{Теорема}}
 
-\newcommand{\startenglish}{\switcht@albion}
-\newcommand{\startrussian}{\switcht@russian}
+\if@internationalization@nla@
+\newcommand{\startenglish}{\switcht@albion\selectlanguahe{english}}
+\newcommand{\startrussian}{\switcht@russian\selectlanguahe{russian}}
+\fi
 
 \renewenvironment{abstract}{%
 \list{}{\advance\topsep by0.35cm\relax\normalsize%
@@ -435,11 +428,18 @@
 \@english@titlefalse
 
 \newenvironment{englishtitle}%
-{\selectlanguage{english}\switcht@albion\@english@titletrue}%
-{\relax\@english@titlefalse}
+{
+  %\selectlanguage{english}
+  %\switcht@albion
+  \@english@titletrue
+}%
+{\relax
+  \@english@titlefalse
+}
 
 \renewcommand\maketitle{\if@english@title\relax\else\newpage\fi
-\phantomsection
+  \phantomsection
+  \if@english@title
   \refstepcounter{chapter}%
   \stepcounter{section}%
   \setcounter{section}{0}%
@@ -448,6 +448,7 @@
   \setcounter{table}{0}
   \setcounter{equation}{0}
   \setcounter{footnote}{0}%
+  \fi
   \begingroup
     \parindent=\z@
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
@@ -554,9 +555,11 @@
 
 \AtBeginDocument{
   % \pagenumbering{arabic} % FIXME
-%  \normalsize
-%  \setlanguage{\start@language}
+  % \normalsize
+  \if@internationalization@nla@
   \start@switcht
+  \start@i18n
+  \fi
 }
 
 \frenchspacing
