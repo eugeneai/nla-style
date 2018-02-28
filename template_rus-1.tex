@@ -1,0 +1,111 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% This is the template file for the 6th International conference
+% NONLINEAR ANALYSIS AND EXTREMAL PROBLEMS
+% June 25-30, 2018
+% Irkutsk, Russia
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amscd}
+\usepackage{amsfonts,amsmath,array}
+\usepackage[dvips]{graphicx}
+\usepackage{longtable,cite,soul,wrapfig}
+\usepackage{showframe}
+
+\textheight= 25cm
+\textwidth= 16cm
+\hoffset= -1.cm
+\voffset= -2.4cm
+%
+\renewcommand{\title}[1]{\begin{center}{\bfseries #1}\par}
+\newcommand{\titleeng}[1]{{\bfseries #1}\par}
+\renewcommand{\author}[1]{\medskip{#1}\par\smallskip}
+\newcommand{\affiliation}[1]{{\itshape #1}\par}
+\newcommand{\email}[1]{\texttt{#1}\par}
+\renewcommand{\maketitle}{\end{center}\par\bigskip}
+\renewcommand{\abstract}{\relax}
+\renewcommand{\endabstract}{\relax}
+%
+\pagestyle{empty}
+
+\begin{document}
+
+
+\title{Название Доклада}
+% Первый автор
+\author{И.~О.~Фамилия1}
+\affiliation{Институт (название в краткой форме), Город, Страна}
+\email{email}
+% Второй автор
+\author{И.~О.~Фамилия2} % обязательное поле
+\affiliation{Институт (название в краткой форме), Город, Страна}
+\email{email}
+% Другие авторы...
+
+\maketitle
+
+\begin{abstract}
+Аннотация на русском языке.
+
+{\bf Ключевые слова:} ключевое слово1, другие.
+\end{abstract}
+
+\bigskip
+
+\section{Основные результаты} % не обязательное поле
+
+Текст доклада на русском языке.
+
+Работа выполнена при поддержке РФФИ (РНФ, другие фонды), проект \textnumero~00-00-00000.
+
+
+% Список литературы.
+\begin{thebibliography}{9}
+\bibitem{1}
+% Format for Journal Reference
+Author1 N., Author2 N.  {\it Article title}. Journal. Year. Vol.~Volume, No~Number. Pp.~Page numbers.
+% Format for books
+\bibitem{2}
+Author N. Book title. Place: Publisher, year.
+% Format for Russian Journal Reference
+\bibitem{3} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+% etc
+\end{thebibliography}
+
+\bigskip
+
+
+% Обязательная информация на английском языке:
+
+\title{Title of the Paper}
+% First author
+\author{FirstAuthor}
+\affiliation{Affiliation, City, Country}
+\email{email}
+% Second author
+\author{SecondAuthor}
+\affiliation{Affiliation, City, Country}
+\email{email}
+% etc
+
+\maketitle
+
+\begin{abstract}
+Insert your english abstract here. Include 3-6 keywords below.
+
+{\bf Keywords:} keyword1,  etc.
+\end{abstract}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

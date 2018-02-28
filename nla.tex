@@ -1,0 +1,62 @@
+\documentclass[12pt]{llncs}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{nla}
+
+%\usepackage[english,russian]{nla}
+
+% \graphicspath{{pics/}} %Set the subfolder with figures (png, pdf).
+
+\usepackage{showframe}
+\begin{document}
+\babelensure{russian}
+
+\title{Название Доклада}
+% Первый автор
+\author{И.~О.~Фамилия\inst{1}
+  \and
+% Второй автор
+И.~О.~Фамилия\inst{2}} % обязательное поле
+\institute{Институт (название в краткой форме), Город, Страна\\
+  \email{email}
+  \and
+Институт (название в краткой форме), Город, Страна\\
+\email{email}}
+% Другие авторы...
+
+\maketitle
+
+\begin{abstract}
+Аннотация на русском языке.
+
+{\bf Ключевые слова:} ключевое слово1, другие.
+\end{abstract}
+
+\section{Основные результаты} % не обязательное поле
+
+Текст доклада на русском языке.
+
+Работа выполнена при поддержке РФФИ (РНФ, другие фонды), проект \textnumero~00-00-00000.
+
+
+% Список литературы.
+\begin{thebibliography}{9}
+\bibitem{1}
+% Format for Journal Reference
+Author1 N., Author2 N.  {\it Article title}. Journal. Year. Vol.~Volume, No~Number. Pp.~Page numbers.
+% Format for books
+\bibitem{2}
+Author N. Book title. Place: Publisher, year.
+% Format for Russian Journal Reference
+\bibitem{3} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+% etc
+\end{thebibliography}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: nla.tex
+%%% End:

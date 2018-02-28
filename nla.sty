@@ -1,0 +1,198 @@
+%%
+%% This is file `nla.sty',
+%%
+%% Project: nla
+%% Version: 2017/03/08 v1.0
+%%
+%% Copyright (C) 2017 by
+%%    Evgeny Cherkashin <eugeneai@irnok.net>
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version. This version of this license is in
+%%    http://www.latex-project.org/lppl/lppl-1-3c.txt
+%% and the latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status "unmaintained".
+%%
+%% This Current Maintainer of this work is Evgeny Cherkashin.
+%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nla}[2017/02/08 v1.0 NLA'2018 and so on correcting style]%
+
+\RequirePackage{iftex}
+\RequirePackage[protrusion=false,expansion=false]{microtype}
+
+\ifPDFTeX\relax
+ %\RequirePackage{newtxtext}
+ %\RequirePackage{newtxmath}
+ %\RequirePackage[utf8]{inputenc}
+ %\RequirePackage[T2A]{fontenc}
+ %\RequirePackage[T1A]{fontenc}
+ %\RequirePackage{times}
+ %\RequirePackage[russian,english]{babel}
+\else
+ \ifLuaTeX
+  \RequirePackage{luatextra}
+  \RequirePackage{fontspec}
+  \usepackage{polyglossia}
+  %\setmainlanguage{russian}
+  %\setotherlanguage{english}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Numbers=Lining}
+  \newfontfeature{Microtype}{protrusion=default;expansion=default;}
+  % \setmathfont{Asana Math}
+  \setsansfont{Linux Biolinum O}
+ \fi
+\fi
+
+%\RequirePackage{amssymb}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+%\RequirePackage{amsthm}
+\@ifpackageloaded{amsthm}{}{
+\RequirePackage{ntheorem}
+}
+% Olga's packages
+\RequirePackage{amscd}
+\RequirePackage{textcomp}
+\RequirePackage{array}
+\RequirePackage{cite}
+\RequirePackage{soul}
+\RequirePackage{wrapfig}
+
+\RequirePackage{geometry}
+\RequirePackage{longtable}
+\RequirePackage{indentfirst}
+%\RequirePackage{caption}
+%\RequirePackage{pageslts}
+%\RequirePackage{tocloft}
+%\RequirePackage{calc}
+%\RequirePackage{secdot}
+%\RequirePackage{cmap}
+%\RequirePackage{appendix}
+\RequirePackage[final]{hyperref}
+%\RequirePackage[sort&compress]{natbib} % Adjusting \cite's
+\RequirePackage{color}
+\definecolor{my@green}{rgb}{0,0.6,0}
+
+%\@ifpackageloaded{natbib}{}{
+%  \setcitestyle{numbers,square} % FIXME!!
+%  }
+\def\nla@defgeom{\geometry{a4paper,height=25cm,width=16cm,inner=1.4cm}}
+
+% \textheight= 25cm
+% \textwidth= 16cm
+% \hoffset= -1.cm
+% \voffset= -2.4cm
+
+
+
+\SetProtrusion
+    [name=std]
+    {
+      encoding={utf8},
+      family=*}
+    {
+    « = {300,     },
+    » = {    , 300},
+    „ = {300,     },
+    “ = {    , 300},
+    ( = {300,     },
+    ) = {    , 300},
+    ! = {    , 300},
+    ? = {    , 300},
+    : = {    , 300},
+    ; = {    , 300},
+    . = {    , 300},
+    - = {    , 300},
+   {,}= {    , 300}
+    }
+%\DeclareMicrotypeSet{t2atext}{}
+%\UseMicrotypeSet{t2atext}
+\microtypesetup{protrusion=true,expansion=true}
+
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Procedings of NLA'2018 conference},    % title
+    pdfauthor={},     % author
+    pdfsubject={math},   % subject of the document
+    pdfcreator={LaTeX},   % creator of the document
+    pdfproducer={LaTeX}, % producer of the document
+    pdfkeywords={math}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black, %[rgb]{0 0.4 0.1},          % color of internal links
+    citecolor=black, %blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=black % [rgb]{0.3 0.0 0.3}           % color of external links
+}
+
+\def\start@language{}
+\def\start@i18n{}
+
+\DeclareOption{english}{
+  \ifLuaTeX
+  \relax
+  \else
+  \@ifpackageloaded{babel}{}{
+    \def\start@language{english}
+    \def\start@i18n{\babelensure{english}}
+    }
+  \fi
+}
+
+\DeclareOption{russian}{
+\ifLuaTeX
+  \setmainlanguage{russian}
+  \setotherlanguage{english}
+  \setkeys{russian}{babelshorthands=true}
+  \setmainfont[Ligatures=TeX]{CMU Serif}
+  \setmainfont[
+  Ligatures=TeX,
+  Extension=.otf,
+  BoldFont=cmunbx,
+  ItalicFont=cmunti,
+  BoldItalicFont=cmunbi,
+  ]{cmunrm}
+  \newfontfamily{\cyrillicfonttt}{Fira Mono}
+\else
+  \@ifpackageloaded{babel}{}{
+    \def\start@language{russian}
+    }
+\fi
+}
+
+\ExecuteOptions{english}
+\ProcessOptions\relax
+
+
+% \RequirePackage{remreset}
+
+
+\AtBeginDocument{
+  % \pagenumbering{arabic} % FIXME
+%  \normalsize
+%  \setlanguage{\start@language}
+}
+
+\frenchspacing
+\righthyphenmin=2
+\lefthyphenmin=2
+
+%\nla@defgeom\start@i18n
+\endinput
+%%
+%% End of file `nla.sty'.
