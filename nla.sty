@@ -25,6 +25,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nla}[2017/02/08 v1.0 NLA'2018 and so on correcting style]%
 
+\@ifpackageloaded{babel}{
+  \typeout{WARNING: Working with BABEL}
+}{
+  \typeout{WARNING: Working without BABEL}
+}
+
 \RequirePackage{iftex}
 \RequirePackage[protrusion=false,expansion=false]{microtype}
 
@@ -54,6 +60,14 @@
   % \setsansfont{Linux Biolinum O}
  \fi
 \fi
+
+\@ifpackageloaded{babel}{
+\typeout{BABEL}%
+}{
+\typeout{NO BABEL.}%
+\providecommand{\selectlanguage}[1]{}
+\providecommand{\select@language}[1]{}
+}
 
 %\RequirePackage{amssymb}
 \RequirePackage{graphicx}
@@ -86,9 +100,9 @@
 \RequirePackage{color}
 \definecolor{my@green}{rgb}{0,0.6,0}
 
-%\@ifpackageloaded{natbib}{}{
-%  \setcitestyle{numbers,square} % FIXME!!
-%  }
+\@ifpackageloaded{natbib}{
+  \setcitestyle{numbers,square} % FIXME!!
+}{}
 
 \def\nla@defgeom{\geometry{a4paper,height=25cm,width=16.7cm,inner=1.5cm,marginparwidth=2cm}}
 
@@ -147,7 +161,7 @@
 
 \def\start@language{}
 \def\start@i18n{}
-\def\start@switcht{\switcht@albion}
+\def\start@switcht{}
 
 % -------------------- OPTION DECLARATION CHUNK ---------------------------
 
@@ -155,13 +169,12 @@
   \ifLuaTeX
   \relax
   \else
-  \@ifpackageloaded{babel}{}{
-    \def\start@language{english}
+  \@ifpackageloaded{babel}{
     \def\start@i18n{\babelensure{english}}
+    \def\start@switcht{\switcht@albion}
+  }{ % FIXME: Polyglossia
     }
     \fi
-    \def\start@switcht{\switcht@albion}
-
 }
 
 \DeclareOption{russian}{
@@ -178,9 +191,9 @@
   BoldItalicFont=cmunbi,
   ]{cmunrm}
 \else
-  \@ifpackageloaded{babel}{}{
+  \@ifpackageloaded{babel}{
     \def\start@language{russian}
-    }
+    }{}
 \fi
 \def\start@switcht{\switcht@russian}
 }
@@ -324,10 +337,11 @@
 \@cons\@openbib@code{\noexpand\small}
 \fi
 
+
 \def\switcht@albion{%
 \def\abstractname{}
 \def\ackname{Acknowledgement.}
-\def\andname{and}
+\def\andname{\unskip, }
 \def\lastandname{\unskip, }
 \def\appendixname{Appendix}
 \def\chaptername{Chapter}
@@ -360,14 +374,16 @@
 \def\subclassname{{\it Subject Classifications\/}:}
 \def\tablename{Table}
 \def\thebibliographyname{References}
-\def\theoremname{Theorem}}
+\def\theoremname{Theorem}
+\@ifpackageloaded{babel}{\selectlanguage{english}}{}
+}
 \switcht@albion
 
 \def\switcht@russian{%
 \def\abstractname{}
 \def\ackname{Благодарности.}
-\def\andname{}
-\def\lastandname{}
+\def\andname{\unskip, }
+\def\lastandname{\unskip, }
 \def\appendixname{Приложения}
 \def\chaptername{Глава}
 \def\claimname{Claim}
@@ -388,7 +404,7 @@
 \def\noteaddname{Замечание в доказательстве}
 \def\notename{Замечание}
 \def\partname{Часть}
-\def\problemname{Проблема} % Задача?
+\def\problemname{Задача}
 \def\proofname{Доказательство}
 \def\propertyname{Свойство}
 \def\propositionname{Утверждение}
@@ -399,7 +415,12 @@
 \def\subclassname{{\it Тематические классификации\/}:}
 \def\tablename{Таблица}
 \def\thebibliographyname{Список литературы}
-\def\theoremname{Теорема}}
+\def\theoremname{Теорема}
+\@ifpackageloaded{babel}{\selectlanguage{russian}}{}
+}
+
+\newcommand{\startenglish}{\switcht@albion}
+\newcommand{\startrussian}{\switcht@russian}
 
 \renewenvironment{abstract}{%
 \list{}{\advance\topsep by0.35cm\relax\normalsize%

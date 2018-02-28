@@ -4,17 +4,20 @@
 % version 2.4 for LaTeX2e as of 16. April 2010
 %
 \documentclass[12pt]{llncs}
-\usepackage{amsmath,amssymb}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
+\usepackage{iftex}
+\ifPDFTeX
+ % \usepackage{amsmath,amssymb}
+ % \usepackage[T2A]{fontenc}
+ % \usepackage[utf8]{inputenc}
+ % \usepackage[english,russian]{babel}
+\fi
 \usepackage{amscd}
 \usepackage{amsfonts,amsmath,array}
 \usepackage[dvips]{graphicx}
 \usepackage{longtable,cite,soul,wrapfig}
 
-\usepackage[russian]{nla}
-\usepackage{showframe}
+\usepackage{nla}
+%\usepackage{showframe}
 %
 \usepackage{makeidx}  % allows for indexgeneration
 %
