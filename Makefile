@@ -28,11 +28,16 @@ tests: test-pdflatex test-lualatex
 test-lualatex:
 	$(LUALATEX) $(ENGSRC)
 	$(LUALATEX) $(ENGSRC)
+	mv $(ENGTRG) lualatex-$(ENGTRG)
 	$(LUALATEX) $(RUSSRC)
 	$(LUALATEX) $(RUSSRC)
+	mv $(RUSTRG) lualatex-$(RUSTRG)
+
 
 test-pdflatex:
 	$(PDFLATEX) $(ENGSRC)
 	$(PDFLATEX) $(ENGSRC)
+	mv $(ENGTRG) pdflatex-$(ENGTRG)
 	$(PDFLATEX) $(RUSSRC)
 	$(PDFLATEX) $(RUSSRC)
+	mv $(RUSTRG) pdflatex-$(RUSTRG)
