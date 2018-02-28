@@ -1,6 +1,11 @@
 # nla-style
-A LaTeX 
+A LaTeX
 
+## CM Unicode Font Family
+
+Computer Modern Font Family (Unicode) is located at http://canopus.iacp.dvo.ru/~panov/cm-unicode/  or as a package at https://www.ctan.org/tex-archive/fonts/cm-unicode
+
+MiKTeX distribution probably contains them (FIXME).
 
 ## License
 This work may be distributed and/or modified under the
