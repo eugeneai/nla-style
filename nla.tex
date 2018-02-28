@@ -2,7 +2,7 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
-\usepackage{nla}
+\usepackage[russian]{nla}
 
 %\usepackage[english,russian]{nla}
 
@@ -12,12 +12,16 @@
 \begin{document}
 \babelensure{russian}
 
-\title{Название Доклада}
+\title{Название доклада\thanks{Работа выполнена при поддержке РФФИ (РНФ, другие фонды), проект \textnumero~00-00-00000.}}
 % Первый автор
-\author{И.~О.~Фамилия\inst{1}
+\author{И.~О.~Фамилия\inst{1},
   \and
 % Второй автор
-И.~О.~Фамилия\inst{2}} % обязательное поле
+  И.~О.~Фамилия\inst{2},
+  \and
+% Третий автор
+  И.~О.~Фамилия\inst{2}
+} % обязательное поле
 \institute{Институт (название в краткой форме), Город, Страна\\
   \email{email}
   \and
@@ -30,18 +34,18 @@
 \begin{abstract}
 Аннотация на русском языке.
 
-{\bf Ключевые слова:} ключевое слово1, другие.
+\keywords{ключевое слово1, другие}
 \end{abstract}
 
 \section{Основные результаты} % не обязательное поле
 
 Текст доклада на русском языке.
 
-Работа выполнена при поддержке РФФИ (РНФ, другие фонды), проект \textnumero~00-00-00000.
+
 
 
 % Список литературы.
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \bibitem{1}
 % Format for Journal Reference
 Author1 N., Author2 N.  {\it Article title}. Journal. Year. Vol.~Volume, No~Number. Pp.~Page numbers.
@@ -50,13 +54,47 @@ Author1 N., Author2 N.  {\it Article title}. Journal. Year. Vol.~Volume, No~Numb
 Author N. Book title. Place: Publisher, year.
 % Format for Russian Journal Reference
 \bibitem{3} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{31} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{32} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{33} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{34} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{35} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{36} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{37} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{38} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{39} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{30} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{3g} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{3b} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
+\bibitem{3b} Фамилия И.О. {\it Название статьи}. Журнал. Год. Т.~том,  \textnumero~номер. С.~страницы.
 % etc
 \end{thebibliography}
+
+\begin{english}
+\title{Title of the Paper}
+% First author
+\author{First Author\inst{1},
+Second Author\inst{2}}
+\institute{Affiliation, City, Country\\
+  \email{email}
+  \and
+Affiliation, City, Country\\
+\email{email}}
+% etc
+
+\maketitle
+
+\begin{abstract}
+Insert your english abstract here. Include 3-6 keywords below.
+
+\keywords{keyword1,  \emph{etc.}}
+\end{abstract}
+\end{english}
 
 
 \end{document}
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: nla.tex
+%%% TeX-master: t
 %%% End:

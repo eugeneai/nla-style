@@ -649,7 +649,7 @@ F-91405 Orsay Cedex, France}
 \makeatletter
 \renewenvironment{thebibliography}[1]
      {\section*{\refname}
-      \small
+      \normalsize
       \list{}%
            {\settowidth\labelwidth{}%
             \leftmargin\parindent
@@ -1105,5 +1105,5 @@ Comm. Pure Appl. Math. 33, 609--633 (1980)
 \addtocmark[2]{Subject Index} % additional numbered TOC entry
 \markboth{Subject Index}{Subject Index}
 \renewcommand{\indexname}{Subject Index}
-\input{subjidx.ind}
+%\input{subjidx.ind}
 \end{document}
