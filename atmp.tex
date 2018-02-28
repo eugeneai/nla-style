@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{filecontents}
+
+% Simulated package file
+\begin{filecontents}{envcode.sty}
+\newcommand\NewEnvCode[2]{%
+ \expandafter\def\csname code@#1\endcsname{#2}%
+ \expandafter\def\csname change@code@#1\endcsname{%
+  \expandafter\let\expandafter\Code\csname code@#1\endcsname
+ }%
+}
+
+\newcommand\MakeDefault{%
+ \expandafter\let\expandafter\code@@default\csname code@\@currenvir\endcsname
+}
+
+\newcommand\RunEnvCode{%
+ \let\Code=\code@@default
+ \csname change@code@\@currenvir\endcsname
+ \Code
+}
+
+\AtBeginDocument{\MakeDefault}
+\end{filecontents}
+
+\usepackage{envcode}
+
+\NewEnvCode{document}{default code}
+\NewEnvCode{equation}{\int_{-\infty}^\infty e^{-x^2/2} dx = \sqrt{2\pi}}
+\NewEnvCode{itemize}{itemize!}
+
+\begin{document}
+ \RunEnvCode
+
+ \begin{equation}
+  \RunEnvCode
+ \end{equation}
+
+ \begin{enumerate}
+  \item \RunEnvCode
+ \end{enumerate}
+
+ \begin{itemize}
+  \item \RunEnvCode
+
+  \item
+  \begin{enumerate}
+   \item \RunEnvCode
+  \end{enumerate}
+
+  \item \MakeDefault
+  \begin{enumerate}
+   \item \RunEnvCode
+  \end{enumerate}
+ \end{itemize}
+
+\end{document}
