@@ -36,7 +36,15 @@
 }
 
 \RequirePackage{iftex}
+\newif\if@ttftex
+\@ttftexfalse
 \ifLuaTeX
+\@ttftextrue
+\fi
+\ifXeTeX
+\@ttftextrue
+\fi
+\if@ttftex
 \RequirePackage[protrusion=false,expansion=false]{microtype}
 \fi
 
@@ -49,18 +57,48 @@
  %\RequirePackage{times}
  %\RequirePackage[russian,english]{babel}
 \else
+ \if@ttftex
+ \RequirePackage{unicode-math}
  \ifLuaTeX
-  \RequirePackage{unicode-math}
-  \RequirePackage{luatextra}
-  \RequirePackage{fontspec}
+ \RequirePackage{luatextra}
+ \fi
+ \ifXeTeX
+ \RequirePackage{fontspec}
+ \fi
   \usepackage{polyglossia}
   %\setmainlanguage{russian}
   %\setotherlanguage{english}
   \usepackage{unicode-math}
   % Default LaTeX fonts as OTF/TTF
+  \ifLuaTeX
   \setmainfont{CMU Serif}
   \setsansfont{CMU Sans Serif}
   \setmonofont{CMU Typewriter Text}
+
+  \else
+
+  \setmainfont{cmun}[
+  Extension=.otf,
+  UprightFont=*rm,
+  ItalicFont=*ti,
+  BoldFont=*bx,
+  BoldItalicFont=*bi,
+  ]
+  \setsansfont{cmun}[
+  Extension=.otf,
+  UprightFont=*ss,
+  ItalicFont=*si,
+  BoldFont=*sx,
+  BoldItalicFont=*so,
+  ]
+  \setmonofont{cmun}[
+  Extension=.otf,
+  UprightFont=*btl,% light version
+  ItalicFont=*bto,%  light version
+  BoldFont=*tb,
+  BoldItalicFont=*tx,
+  ]
+  \fi
   \defaultfontfeatures{Ligatures=TeX,Numbers=Lining,Scale=MatchLowercase}
   \newfontfeature{Microtype}{protrusion=default;expansion=default;}
   % \setsansfont{Linux Biolinum O}
@@ -116,7 +154,7 @@
 % \voffset= -2.4cm
 
 
-\ifLuaTeX % Does not work with MiKTeX pdflatex
+\if@ttftex % Does not work with MiKTeX pdflatex
 \SetProtrusion
     [name=std]
     {
@@ -139,7 +177,11 @@
     }
 %\DeclareMicrotypeSet{t2atext}{}
 %\UseMicrotypeSet{t2atext}
+\ifLuaTeX
 \microtypesetup{protrusion=true,expansion=true}
+\else
+\microtypesetup{protrusion=true,expansion=false}
+\fi
 \fi
 
 \hypersetup{
@@ -176,7 +218,7 @@
 }
 
 \DeclareOption{russian}{
-\ifLuaTeX
+\if@ttftex
   \setmainlanguage{russian}
   \setotherlanguage{english}
   \setkeys{russian}{babelshorthands=true}

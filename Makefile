@@ -1,4 +1,4 @@
-.PHONY: compile tests
+.PHONY: compile tests test-pdflatex test-lualatex test-xelatex
 
 SOURCE=nla.tex
 TARGET=$(SOURCE:.tex=.pdf)
@@ -6,6 +6,7 @@ TARGET=$(SOURCE:.tex=.pdf)
 LATEXPARAMS= -shell-escape -interaction nonstopmode -halt-on-error -file-line-error
 PDFLATEX=pdflatex $(LATEXPARAMS)
 LUALATEX=lualatex $(LATEXPARAMS)
+XELATEX=xelatex $(LATEXPARAMS)
 LATEX=$(PDFLATEX)
 
 ENGSRC=test-eng.tex
@@ -23,7 +24,7 @@ $(TARGET): $(SOURCE)
 	$(LATEX) $<
 
 
-tests: test-pdflatex test-lualatex
+tests: test-pdflatex test-lualatex test-xelatex
 
 test-lualatex:
 	$(LUALATEX) $(ENGSRC)
@@ -33,6 +34,13 @@ test-lualatex:
 	$(LUALATEX) $(RUSSRC)
 	mv $(RUSTRG) lualatex-$(RUSTRG)
 
+test-xelatex:
+	$(XELATEX) $(ENGSRC)
+	$(XELATEX) $(ENGSRC)
+	mv $(ENGTRG) xelatex-$(ENGTRG)
+	$(XELATEX) $(RUSSRC)
+	$(XELATEX) $(RUSSRC)
+	mv $(RUSTRG) xelatex-$(RUSTRG)
 
 test-pdflatex:
 	$(PDFLATEX) $(ENGSRC)
