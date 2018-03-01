@@ -36,7 +36,9 @@
 }
 
 \RequirePackage{iftex}
+\ifLuaTeX
 \RequirePackage[protrusion=false,expansion=false]{microtype}
+\fi
 
 \ifPDFTeX\relax
  %\RequirePackage{newtxtext}
@@ -114,7 +116,7 @@
 % \voffset= -2.4cm
 
 
-
+\ifLuaTeX % Does not work with MiKTeX pdflatex
 \SetProtrusion
     [name=std]
     {
@@ -138,7 +140,7 @@
 %\DeclareMicrotypeSet{t2atext}{}
 %\UseMicrotypeSet{t2atext}
 \microtypesetup{protrusion=true,expansion=true}
-
+\fi
 
 \hypersetup{
     %bookmarks=true,         % show bookmarks bar?
@@ -428,8 +430,8 @@
 
 \newenvironment{englishtitle}%
 {
-  %\selectlanguage{english}
-  %\switcht@albion
+  \selectlanguage{english}
+  \switcht@albion
   \@english@titletrue
 }%
 {\relax
