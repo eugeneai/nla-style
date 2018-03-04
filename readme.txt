@@ -32,3 +32,23 @@ It consists of the following files:
   aliascnt.sty       part of the Oberdiek bundle; allows more control over
                      the counters associated to any numbered item
   remreset.sty       by David Carlisle
+
+NLA'2018 organizing committee added the following files:
+
+  nla.sty            Correcting style file, adapting llncs.cls to NLA'2018
+                     proceedings layout.
+
+  template_eng-1.tex The paper template and instruction for papers in English.
+
+  template_rus-1.tex The paper template and instruction for papers in Russian.
+
+  my-paper-pics      An empty subfolder for pictures.
+
+  Makefile           Makefile for unix users facilitating paper compilation.
+                     Usage:  make
+                     Add target 'compile' to force the compilation, i.e.,
+                     make compile
+
+The llncs class adaptation project site is https://github.com/eugeneai/nla-style.
+The NLA'2018 conference site is http://nla.icc.ru/.  We will soon publish there
+an instruction on the usage overleaf.com service for the paper preparation.
