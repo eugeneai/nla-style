@@ -23,7 +23,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{nla}[2017/02/08 v1.0 NLA'2018 and so on correcting style]%
+\ProvidesPackage{nla}[2017/03/08 v1.0 NLA'2018 and so on correcting style]%
 
 \newif\if@internationalization@nla@
 \@internationalization@nla@false
@@ -35,24 +35,6 @@
   %\typeout{WARNING: Working without BABEL}
 }
 
-\newif\if@nla@unicode
-
-\@nla@unicodetrue
-
-\@ifpackageloaded{inputenc}{
-  \ifx\if@uni@ode\undefined
-  \@nla@unicodefalse % FIXME: This is not completely correct, and welcome
-  % suppose that old way of Russian names definition
-  % will work safely.
-  \else
-  \if@uni@ode
-  \@nla@unicodetrue
-  \else
-  \@nla@unicodefalse
-  \fi
-  \fi
-}{}
-
 \RequirePackage{iftex}
 \newif\if@ttftex
 \@ttftexfalse
@@ -62,6 +44,35 @@
 \ifXeTeX
 \@ttftextrue
 \fi
+
+\newif\if@english@title
+\@english@titlefalse
+
+\newif\if@nla@unicode
+\@nla@unicodetrue
+
+\@ifpackageloaded{inputenc}{
+%\if@ttftex\relax\else
+%\let\if@uni@ode\undefined
+%\fi
+\def\nla@check@unicode{
+  \if@uni@ode
+  \@nla@unicodetrue
+  \else
+  \@nla@unicodefalse
+  \fi
+}
+  \ifx \if@uni@ode \undefined
+  \@nla@unicodefalse % FIXME: This is not completely correct, and welcome
+  % suppose that old way of Russian names definition
+  % will work safely.
+  \fi
+  \if@nla@unicode
+  \nla@check@unicode
+  \fi
+}{}
+
+
 \if@ttftex
 \RequirePackage[protrusion=false,expansion=false]{microtype}
 \fi
@@ -522,9 +533,6 @@
 %\itemindent\z@%
 \itemindent\parindent%
 \rightmargin\leftmargin}\item[]}{\endlist}
-
-\newif\if@english@title
-\@english@titlefalse
 
 \newenvironment{englishtitle}%
 {

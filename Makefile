@@ -24,6 +24,7 @@ $(TARGET): $(SOURCE)
 	$(LATEX) $<
 
 
+# tests: test-xelatex
 tests: test-pdflatex test-lualatex test-xelatex
 
 test-lualatex:
