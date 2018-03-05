@@ -40,10 +40,16 @@
 \@nla@unicodetrue
 
 \@ifpackageloaded{inputenc}{
+  \ifx\if@uni@ode\undefined
+  \@nla@unicodefalse % FIXME: This is not completely correct, and welcome
+  % suppose that old way of Russian names definition
+  % will work safely.
+  \else
   \if@uni@ode
   \@nla@unicodetrue
   \else
   \@nla@unicodefalse
+  \fi
   \fi
 }{}
 
