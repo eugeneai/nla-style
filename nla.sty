@@ -152,7 +152,7 @@
 \RequirePackage{amscd}
 \RequirePackage{textcomp}
 \RequirePackage{array}
-\RequirePackage{cite}
+\RequirePackage[sort,compress]{cite}
 \RequirePackage{soul}
 \RequirePackage{wrapfig}
 
@@ -169,6 +169,8 @@
 \RequirePackage[final]{hyperref}
 %\RequirePackage[sort&compress]{natbib} % Adjusting \cite's
 \RequirePackage{color}
+%\RequirePackage[numbers,sort&compress]{natbib}
+
 \definecolor{my@green}{rgb}{0,0.6,0}
 
 \@ifpackageloaded{natbib}{
@@ -181,6 +183,8 @@
 % \textwidth= 16cm
 % \hoffset= -1.cm
 % \voffset= -2.4cm
+
+\def\email#1{\makeatletter{\tt#1}\makeatother}
 
 
 \if@ttftex % Does not work with MiKTeX pdflatex
