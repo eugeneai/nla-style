@@ -54,9 +54,13 @@
 % При использовании pdfLaTeX добавляется стандартный набор русификации babel.
 % Если верстка производится в LuaLaTeX, то следующие три строки надо
 % закомментировать, русификация будет произведена в корректирующем стиле автоматом.
+\usepackage{iftex}
+
+\ifPDFTeX
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc} % Кодировка utf-8, cp1251 и т.д.
 \usepackage[english,russian]{babel}
+\fi
 
 % Для верстки в LuaLaTeX текст готовится строго в utf-8!
 
