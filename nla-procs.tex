@@ -17,8 +17,6 @@
 \usepackage[dvips]{graphicx}
 \usepackage{longtable,cite,wrapfig}
 
-\newenvironment{englisharticle}{\begin{englishtitle}}{\end{englishtitle}}
-
 \usepackage[russian]{nla}
 %\usepackage{showframe}
 %
@@ -33,6 +31,7 @@
 %
 \chapter*{Preface}
 %
+\begin{otherlanguage}{english}
 This textbook is intended for use by students of physics, physical
 chemistry, and theoretical chemistry. The reader is presumed to have a
 basic knowledge of atomic and quantum physics at the level provided, for
@@ -54,6 +53,7 @@ chemist. As examples, we might mention the structural analysis of
 complex organic compounds, spectroscopic investigation of very rapid
 reaction processes or, as a practical application, the remote detection
 of pollutants in the air.
+\end{otherlanguage}
 
 \vspace{1cm}
 \begin{flushright}\noindent
@@ -63,9 +63,11 @@ ECOOP'95
 \end{flushright}
 %
 \chapter*{Organization}
+\begin{otherlanguage}{english}
 ECOOP'95 is organized by the department of Computer Science, Univeristy
 of \AA rhus and AITO (association Internationa pour les Technologie
 Object) in cooperation with ACM/SIGPLAN.
+\end{otherlanguage}
 %
 \section*{Executive Commitee}
 \begin{tabular}{@{}p{5cm}@{}p{7.2cm}@{}}
@@ -176,9 +178,11 @@ M.~Zimmer\end{multicols}
 %
 \section*{Sponsoring Institutions}
 %
+\begin{otherlanguage}{english}
 Bernauer-Budiman Inc., Reading, Mass.\\
 The Hofmann-International Company, San Louis Obispo, Cal.\\
 Kramer Industries, Heidelberg, Germany
+\end{otherlanguage}
 %
 \tableofcontents
 %
@@ -1119,3 +1123,8 @@ Comm. Pure Appl. Math. 33, 609--633 (1980)
 \renewcommand{\indexname}{Subject Index}
 %\input{subjidx.ind}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

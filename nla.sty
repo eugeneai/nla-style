@@ -48,6 +48,9 @@
 \newif\if@english@title
 \@english@titlefalse
 
+\newif\if@russian@title
+\@english@titletrue
+
 \newif\if@nla@unicode
 \@nla@unicodetrue
 
@@ -525,8 +528,8 @@
 \fi
 
 \if@internationalization@nla@
-\newcommand{\startenglish}{\switcht@albion\selectlanguahe{english}}
-\newcommand{\startrussian}{\switcht@russian\selectlanguahe{russian}}
+\newcommand{\startenglish}{\switcht@albion\selectlanguage{english}}
+\newcommand{\startrussian}{\switcht@russian\selectlanguage{russian}}
 \fi
 
 \renewenvironment{abstract}{%
@@ -545,7 +548,21 @@
   \@english@titletrue
 }%
 {\relax
+  \selectlanguage{russian}
   \@english@titlefalse
+}
+
+\newenvironment{englisharticle}%
+{
+  \startenglish
+  \@english@titletrue
+  \@russian@titlefalse
+}%
+{\relax
+  \startrussian
+  \selectlanguage{russian}
+  \switcht@russian
+
 }
 
 \renewcommand\maketitle{\if@english@title\relax\else\newpage\fi
