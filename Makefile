@@ -50,3 +50,6 @@ test-pdflatex:
 	$(PDFLATEX) $(RUSSRC)
 	$(PDFLATEX) $(RUSSRC)
 	mv $(RUSTRG) pdflatex-$(RUSTRG)
+
+clean:
+	rm -rf *.aux *.thm *.out *.log

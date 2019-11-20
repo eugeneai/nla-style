@@ -23,7 +23,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{nla}[2017/03/08 v1.0 NLA'2018 and so on correcting style]%
+\ProvidesPackage{nla}[2019/11/20 v1.1 NLA'2018 and so on correcting style]%
 
 \newif\if@internationalization@nla@
 \@internationalization@nla@false
@@ -86,6 +86,9 @@
 \RequirePackage[protrusion=false,expansion=false]{microtype}
 \fi
 
+%\def\@nlacyrscript{\newfontfamily\cyrillicfont{Times New Roman}[Script=Cyrillic]}
+\def\@nlacyrscript{}
+
 \ifPDFTeX\relax
  %\RequirePackage{newtxtext}
  %\RequirePackage{newtxmath}
@@ -96,13 +99,13 @@
  %\RequirePackage[russian,english]{babel}
 \else
  \if@ttftex
- \RequirePackage{unicode-math}
  \ifLuaTeX
  \RequirePackage{luatextra}
  \fi
  \ifXeTeX
  \RequirePackage{fontspec}
  \fi
+  \RequirePackage{unicode-math}
   \usepackage{polyglossia}
   \@varlang@nla@true
   \setmainlanguage{english}
@@ -111,11 +114,15 @@
   \usepackage{unicode-math}
   % Default LaTeX fonts as OTF/TTF
   \ifLuaTeX
-  %\setmainfont{CMU Serif}
-  %\setsansfont{CMU Sans Serif}
-  %\setmonofont{CMU Typewriter Text}
+   % \setmainfont{CMU Serif}
+   % \setsansfont{CMU Sans Serif}
+   % \setmonofont{CMU Typewriter Text}
+   \setmainfont{Latin Modern Roman}
+   \setsansfont{Latin Modern Sans}
+   \setmonofont{Latin Modern Mono}
   \else
 
+  %%%% Is it very necessary ????? It is!
   \setmainfont{cmun}[
   Extension=.otf,
   UprightFont=*rm,
@@ -268,15 +275,34 @@
   \@varlang@nla@true
   \@ruslang@nla@true
   % \setmainfont[Ligatures=TeX]{CMU Serif} % FIXME: texlive-texfontsextra
-  % \setmainfont[
-  % Ligatures=TeX,
-  % Extension=.otf,
-  % BoldFont=cmunbx,
-  % ItalicFont=cmunti,
-  % BoldItalicFont=cmunbi,
-  % ]{cmunrm}
+   % \setmainfont{cmunrm}[
+   % Ligatures=TeX,
+   % Extension=.otf,
+   % BoldFont=cmunbx,
+   % ItalicFont=cmunti,
+   % BoldItalicFont=cmunbi,
+   % ]
+  \def\@nlacyrscript{
+%    \newfontfamily{\cyrillicfont}{Latin Modern Roman} %[
+    % Ligatures=TeX,
+    % Extension=.otf,
+    % BoldFont=cmunbx,
+    % ItalicFont=cmunti,
+    % BoldItalicFont=cmunbi,
+    % Script=Cyrillic
+    % ]
+  }
   % \newfontfamily{\cyrillicfont}{latinmodern}
-  \newfontfamily{\cyrillicfont}{Times New Roman}
+   % \newfontfamily{\cyrillicfont}{Times New Roman}
+   % \newfontfamily\cyrillicfont{Times New Roman}[Script=Cyrillic]
+  % \newfontfamily{\cyrillicfont}{cmun}[
+  % Extension=.otf,
+  % UprightFont=*rm,
+  % ItalicFont=*ti,
+  % BoldFont=*bx,
+  % BoldItalicFont=*bi,
+  % ]
+
 \fi
   \if@internationalization@nla@
   \def\start@i18n{\selectlanguage{russian}}
@@ -289,7 +315,9 @@
 \else
   \setmainfont{Times New Roman}
   \newfontfamily{\cyrillicfonttt}{Courier New}
-  \newfontfamily{\cyrillicfont}{Times New Roman}
+    \def\@nlacyrscript{
+      \newfontfamily{\cyrillicfont}{Times New Roman}
+      }
   \setmathfont{XITS Math}
 \fi
 }
@@ -305,7 +333,7 @@
 \ifPDFTeX\relax
 \else
   \setmonofont[Numbers=SlashedZero]{Fira Mono}
-  \newfontfamily{\cyrillicfonttt}{Fira Mono}
+  \renewfontfamily{\cyrillicfonttt}{Fira Mono}
 \fi
 }
 
@@ -313,7 +341,7 @@
 \ifPDFTeX\relax
 \else
   \setmonofont[Numbers=SlashedZero]{Source Code Pro}
-  \newfontfamily{\cyrillicfonttt}{Source Code Pro}
+  \renewfontfamily{\cyrillicfonttt}{Source Code Pro}
 \fi
 }
 
@@ -328,12 +356,6 @@
 
 \ExecuteOptions{english}
 \ProcessOptions\relax
-
-\if@ruslang@nla@
-\setmainlanguage{russian}
-\setkeys{russian}{babelshorthands=true}
-\setotherlanguage{english}
-\fi
 
 
 % \RequirePackage{remreset}
@@ -698,10 +720,18 @@
  \end{center}%
  }
 
+\if@ruslang@nla@
+\setmainlanguage{russian}
+\setkeys{russian}{babelshorthands=true}
+\setotherlanguage{english}
+\@nlacyrscript
+% \newfontfamily\cyrillicfont{Times New Roman}[Script=Cyrillic]
+\fi
 
 \AtBeginDocument{
   % \pagenumbering{arabic} % FIXME
   % \normalsize
+
   \if@internationalization@nla@
   \start@switcht
   \start@i18n
@@ -712,7 +742,7 @@
 \righthyphenmin=2
 \lefthyphenmin=2
 
-\nla@defgeom\start@i18n
+\nla@defgeom
 \endinput
 %%
 %% End of file `nla.sty'.
