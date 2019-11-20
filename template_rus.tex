@@ -114,11 +114,14 @@
 } % обязательное поле
 
 % Аффилиации пишутся в следующей форме, соединяя каждый институт при помощи \and.
-\institute{Институт (название в краткой форме), Город, Страна\\
-  \email{email}
+\institute{Институт (название в краткой форме), Город, Страна \\
+\begin{equation}
+a+b
+\end{equation}
+  \email{email@example.com}
   \and   % Разделяет институты и присваивает им номера по порядку.
 Институт (название в краткой форме), Город, Страна\\
-\email{email}
+%\eemail{email1}
 % \and Другие авторы...
 }
 
@@ -197,7 +200,7 @@ Affiliation, City, Country\\
 \email{email}}
 % etc
 
-\maketitle
+% \maketitle
 
 \begin{abstract}
 Insert your english abstract here. Include 3-6 keywords below.

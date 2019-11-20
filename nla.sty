@@ -28,6 +28,12 @@
 \newif\if@internationalization@nla@
 \@internationalization@nla@false
 
+\newif\if@varlang@nla@
+\@varlang@nla@false
+
+\newif\if@ruslang@nla@
+\@ruslang@nla@false
+
 \@ifpackageloaded{babel}{
   %\typeout{WARNING: Working with BABEL}
   \@internationalization@nla@true
@@ -98,7 +104,9 @@
  \RequirePackage{fontspec}
  \fi
   \usepackage{polyglossia}
+  \@varlang@nla@true
   \setmainlanguage{english}
+  \@ruslang@nla@false
   %\setotherlanguage{english}
   \usepackage{unicode-math}
   % Default LaTeX fonts as OTF/TTF
@@ -186,7 +194,10 @@
 % \hoffset= -1.cm
 % \voffset= -2.4cm
 
-\def\email#1{\makeatletter{\tt#1}\makeatother}
+% \def\email#1{}
+% \def\email#1{\tt #1}
+% \renewcommand\email[1]{\makeatletter{\texttt{#1}}\makeatother}
+% \newcommand\eemail[1]{\texttt{#1}}
 
 
 \if@ttftex % Does not work with MiKTeX pdflatex
@@ -254,9 +265,8 @@
 
 \DeclareOption{russian}{
 \if@ttftex
-  \setmainlanguage{russian}
-  \setotherlanguage{english}
-  \setkeys{russian}{babelshorthands=true}
+  \@varlang@nla@true
+  \@ruslang@nla@true
   % \setmainfont[Ligatures=TeX]{CMU Serif} % FIXME: texlive-texfontsextra
   % \setmainfont[
   % Ligatures=TeX,
@@ -265,6 +275,8 @@
   % ItalicFont=cmunti,
   % BoldItalicFont=cmunbi,
   % ]{cmunrm}
+  % \newfontfamily{\cyrillicfont}{latinmodern}
+  \newfontfamily{\cyrillicfont}{Times New Roman}
 \fi
   \if@internationalization@nla@
   \def\start@i18n{\selectlanguage{russian}}
@@ -277,6 +289,7 @@
 \else
   \setmainfont{Times New Roman}
   \newfontfamily{\cyrillicfonttt}{Courier New}
+  \newfontfamily{\cyrillicfont}{Times New Roman}
   \setmathfont{XITS Math}
 \fi
 }
@@ -315,6 +328,12 @@
 
 \ExecuteOptions{english}
 \ProcessOptions\relax
+
+\if@ruslang@nla@
+\setmainlanguage{russian}
+\setkeys{russian}{babelshorthands=true}
+\setotherlanguage{english}
+\fi
 
 
 % \RequirePackage{remreset}
