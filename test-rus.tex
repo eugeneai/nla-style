@@ -1,10 +1,14 @@
 \documentclass[12pt]{llncs}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
-\usepackage[russian]{nla}
 
-%\usepackage[english,russian]{nla}
+\usepackage{iftex}
+
+\ifPDFTeX
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} % Кодировка utf-8, cp1251 и т.д.
+\usepackage[english,russian]{babel}
+\fi
+
+\usepackage[english,russian]{nla}
 
 % \graphicspath{{pics/}} %Set the subfolder with figures (png, pdf).
 

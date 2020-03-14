@@ -28,6 +28,7 @@ $(TARGET): $(SOURCE)
 tests: test-pdflatex test-lualatex test-xelatex
 
 test-lualatex:
+	rm -f *.aux
 	$(LUALATEX) $(ENGSRC)
 	$(LUALATEX) $(ENGSRC)
 	mv $(ENGTRG) lualatex-$(ENGTRG)
@@ -36,6 +37,7 @@ test-lualatex:
 	mv $(RUSTRG) lualatex-$(RUSTRG)
 
 test-xelatex:
+	rm -f *.aux
 	$(XELATEX) $(ENGSRC)
 	$(XELATEX) $(ENGSRC)
 	mv $(ENGTRG) xelatex-$(ENGTRG)
@@ -44,9 +46,13 @@ test-xelatex:
 	mv $(RUSTRG) xelatex-$(RUSTRG)
 
 test-pdflatex:
+	rm -f *.aux
 	$(PDFLATEX) $(ENGSRC)
 	$(PDFLATEX) $(ENGSRC)
 	mv $(ENGTRG) pdflatex-$(ENGTRG)
 	$(PDFLATEX) $(RUSSRC)
 	$(PDFLATEX) $(RUSSRC)
 	mv $(RUSTRG) pdflatex-$(RUSTRG)
+
+clean:
+	rm -rf *.aux test-*.pdf *.log

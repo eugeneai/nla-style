@@ -81,32 +81,39 @@
 \fi
 
 \ifPDFTeX\relax
- %\RequirePackage{newtxtext}
- %\RequirePackage{newtxmath}
- %\RequirePackage[utf8]{inputenc}
- %\RequirePackage[T2A]{fontenc}
- %\RequirePackage[T1A]{fontenc}
- %\RequirePackage{times}
- %\RequirePackage[russian,english]{babel}
+ % \RequirePackage{newtxtext}
+ % \RequirePackage{newtxmath}
+ % \RequirePackage[utf8]{inputenc}
+ % \RequirePackage[T2A]{fontenc}
+ % \RequirePackage{times}
+ % \RequirePackage[russian,english]{babel}
 \else
  \if@ttftex
  \RequirePackage{unicode-math}
+  \setmathfont{latinmodern-math.otf}
  \ifLuaTeX
  \RequirePackage{luatextra}
  \fi
  \ifXeTeX
- \RequirePackage{fontspec}
+ % \RequirePackage{fontspec}
+ \RequirePackage{xltxtra}
  \fi
   \usepackage{polyglossia}
-  %\setmainlanguage{russian}
-  %\setotherlanguage{english}
-  \usepackage{unicode-math}
+  %\ifXeTeX
+   \setmainlanguage{english}
+   \setotherlanguage{russian}
+  %\fi
+  %\usepackage{unicode-math}
   % Default LaTeX fonts as OTF/TTF
   \ifLuaTeX
   \setmainfont{CMU Serif}
   \setsansfont{CMU Sans Serif}
   \setmonofont{CMU Typewriter Text}
-
+  %\newfontfamily\cyrillicfont[Script=Cyrillic]{Times New Roman}
+  \newfontfamily{\cyrillicfont}{CMU Serif}
+  \newfontfamily{\cyrillicfonttt}{CMU Typewriter Text}
+  \newfontfamily{\cyrillicfontsf}{CMU Sans Serif}
+  %\newfontfamily\russianfont[Script=Cyrillic]{Linux Libertine}
   \else
 
   \setmainfont{cmun}[
@@ -146,7 +153,7 @@
 %\RequirePackage{amssymb}
 \RequirePackage{graphicx}
 \RequirePackage{amsmath}
-\RequirePackage{amsfonts}
+%\RequirePackage{amsfonts}
 %\RequirePackage{amsthm}
 \@ifpackageloaded{amsthm}{}{
 \RequirePackage{ntheorem}
@@ -266,6 +273,13 @@
   % ItalicFont=cmunti,
   % BoldItalicFont=cmunbi,
   % ]{cmunrm}
+  % \else
+  %  \RequirePackage{newtxtext}
+  %  \RequirePackage{newtxmath}
+  %  % \RequirePackage{times}
+  %  \RequirePackage[russian,english]{babel}
+  %  \RequirePackage[utf8]{inputenc}
+  %  \RequirePackage[T2A]{fontenc}
 \fi
   \if@internationalization@nla@
   \def\start@i18n{\selectlanguage{russian}}
@@ -694,7 +708,7 @@
 \righthyphenmin=2
 \lefthyphenmin=2
 
-\nla@defgeom\start@i18n
+\nla@defgeom%\start@i18n
 \endinput
 %%
 %% End of file `nla.sty'.
